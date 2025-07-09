@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="si">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="School Timetable Management System - පාසල් කාලසටහන් කළමනාකරණ පද්ධතිය"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Google Fonts for Sinhala Support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <title>School Timetable - පාසල් කාලසටහන්</title>
+    
+    <style>
+      /* Global styles for Sinhala font support */
+      body {
+        font-family: 'Noto Sans Sinhala', 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+      }
+      
+      /* Loading spinner */
+      .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f5f5f5;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid #e3f2fd;
+        border-top: 5px solid #1976d2;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        margin-top: 20px;
+        font-size: 16px;
+        color: #666;
+        text-align: center;
+      }
+      
+      /* Print styles */
+      @media print {
+        body {
+          font-family: 'Noto Sans Sinhala', serif;
+          font-size: 12pt;
+          line-height: 1.4;
+        }
+        
+        .no-print {
+          display: none !important;
+        }
+        
+        .print-only {
+          display: block !important;
+        }
+        
+        @page {
+          size: A4 landscape;
+          margin: 1cm;
+        }
+        
+        .timetable-grid {
+          page-break-inside: avoid;
+        }
+        
+        .timetable-cell {
+          border: 1px solid #000 !important;
+          padding: 4px !important;
+          font-size: 10pt !important;
+        }
+      }
+      
+      /* Responsive design */
+      @media (max-width: 768px) {
+        body {
+          font-size: 14px;
+        }
+      }
+      
+      /* Dark mode support */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #121212;
+          color: #ffffff;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px;">
+        <h2>JavaScript අක්‍රිය කර ඇත</h2>
+        <p>මෙම යෙදුම ක්‍රියාත්මක කිරීමට JavaScript අවශ්‍ය වේ.</p>
+        <hr>
+        <h2>JavaScript is disabled</h2>
+        <p>You need to enable JavaScript to run this app.</p>
+      </div>
+    </noscript>
+    
+    <div id="root">
+      <div class="loading-container">
+        <div>
+          <div class="loading-spinner"></div>
+          <div class="loading-text">
+            <div>පාසල් කාලසටහන් පද්ධතිය පූරණය වෙමින්...</div>
+            <div>Loading School Timetable System...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
